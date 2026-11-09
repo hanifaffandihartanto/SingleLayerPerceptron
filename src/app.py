@@ -11,12 +11,12 @@ def main():
     parser.add_argument(
         "--train",
         default="../data/iris-training.xlsx",
-        help="File Excel training (default: data/iris-training.xlsx).",
+        help="File Excel training (default: ../data/iris-training.xlsx).",
     )
     parser.add_argument(
         "--validation",
         default="../data/iris-validation.xlsx",
-        help="File Excel validation (default: data/iris-validation.xlsx).",
+        help="File Excel validation (default: ../data/iris-validation.xlsx).",
     )
     parser.add_argument("--epochs", type=int, default=5)
     parser.add_argument("--learning-rate", type=float, default=0.1)
