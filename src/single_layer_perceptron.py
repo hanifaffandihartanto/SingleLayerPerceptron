@@ -1,11 +1,20 @@
 import math
 
-def sigmoid(x):
+#fungsi aktivasi sigmoid
+def activation(x):
     return 1 / (1 + math.exp(-x))
+
+#fungsi prediksi, jika >=0.5 dibulatkan ke atas
+def pred(activation):
+    if activation >= 0.5:
+        prediction = 1.0
+    else:
+        prediction = 0.0
+    return prediction
 
 def forward(weights, x):
     z = sum(weights[i + 1] * x[i] for i in range(4)) + weights[0]
-    output = sigmoid(z)
+    output = activation(z)
     predicted = 1 if output > 0.5 else 0
     return z, output, predicted
 
