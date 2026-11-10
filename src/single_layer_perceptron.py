@@ -15,7 +15,7 @@ def pred(activation):
 def forward(weights, x):
     z = sum(weights[i + 1] * x[i] for i in range(4)) + weights[0]
     output = activation(z)
-    predicted = 1 if output > 0.5 else 0
+    predicted = pred(output)
     return z, output, predicted
 
 def evaluate(dataset, weights):
