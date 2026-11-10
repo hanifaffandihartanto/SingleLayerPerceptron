@@ -12,6 +12,10 @@ def pred(activation):
         prediction = 0.0
     return prediction
 
+# Fungsi untuk menghitung w berikutnya
+def delta(output):
+    return output * (1.0 - output)
+
 def forward(weights, x):
     z = sum(weights[i + 1] * x[i] for i in range(4)) + weights[0]
     output = activation(z)
@@ -26,8 +30,7 @@ def evaluate(dataset, weights):
         x = item["x"]
         target = item["y"]
         z, output, predicted = forward(weights, x)
-        error = output - target
-        squared_error = error ** 2
+        squared_error = (output - target) ** 2
 
         correct += int(predicted == target)
         sum_squared_error += squared_error
@@ -50,17 +53,17 @@ def training_validation (training_data, validation_data, epochs, weights, learni
                 weights_before = weights[:]
     
                 z, output, predicted = forward(weights_before, x)
-                error = output - target
-                squared_error = error ** 2
+               
+                squared_error = (output - target) ** 2
     
                 # Turunan Squared Error terhadap net input.
-                delta = 2.0 * (output - target) * output * (1.0 - output)
+                delta_value = 2.0 * (output - target) * delta(output)
     
                 # x0=1 untuk bias, dilanjutkan X1-X4.
                 input_with_bias = [1.0] + x
                 weights = [
                     weights_before[i]
-                    - learning_rate * delta * input_with_bias[i]
+                    - learning_rate * delta_value * input_with_bias[i]
                     for i in range(5)
                 ]
     
